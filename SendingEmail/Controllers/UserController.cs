@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SendingEmail.Services;
 using SendingEmail.Model;
+using SendingEmail.Interfaces;
 
 namespace SendingEmail.Controllers
 {
@@ -9,8 +10,8 @@ namespace SendingEmail.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly EmailSender _emailSender;
-        public UserController(EmailSender emailSender)
+        private readonly IEmailSender _emailSender;
+        public UserController(IEmailSender emailSender)
         {
             _emailSender = emailSender;
         }

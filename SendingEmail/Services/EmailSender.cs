@@ -1,6 +1,8 @@
-﻿namespace SendingEmail.Services
+﻿using SendingEmail.Interfaces;
+
+namespace SendingEmail.Services
 {
-    public class EmailSender
+    public class EmailSender : IEmailSender
     {
         private readonly MessageFactory _factory;
         private readonly NetworkClient _client;

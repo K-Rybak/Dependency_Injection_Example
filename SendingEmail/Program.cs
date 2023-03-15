@@ -1,3 +1,4 @@
+using SendingEmail.Interfaces;
 using SendingEmail.Model;
 using SendingEmail.Services;
 
@@ -10,7 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //DI
-builder.Services.AddScoped<EmailSender>();
+//builder.Services.AddEmailSender();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<MessageFactory>();
 builder.Services.AddSingleton<NetworkClient>();
 builder.Services.AddSingleton(
@@ -19,6 +21,14 @@ builder.Services.AddSingleton(
         host: "smtp.server.com",
         port: 25
     ));
+
+//builder.Services.AddScoped(
+//    provider =>
+//        new EmailServerSettings
+//        (
+//            host: "smtp.server.com",
+//            port: 25
+//        ));
 
 var app = builder.Build();
 
