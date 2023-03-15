@@ -9,19 +9,16 @@ namespace SendingEmail.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly EmailSender _emailSender;
+        public UserController(EmailSender emailSender)
+        {
+            _emailSender = emailSender;
+        }
+
         [HttpPost("register")]
         public IActionResult RegisterUser(string username)
         {
-            var emailSender = new EmailSender(
-                new MessageFactory(),
-                new NetworkClient(
-                    new EmailServerSettings
-                    (
-                        host: "smtp.server.com",
-                        port: 25
-                     ))
-                );
-            emailSender.SendEmail(username);
+            _emailSender.SendEmail(username);
             return Ok();
         }
     }
